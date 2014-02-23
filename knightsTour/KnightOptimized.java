@@ -9,46 +9,30 @@ public class KnightOptimized extends Knight {
             return 694;
         }
         int moves = 0;
-        try {
-            if (grid[x+1][y+2] == 0) {
-                moves ++;
-            }
-        } catch (Exception e) {}
-        try {
-            if (grid[x+2][y+1] == 0) {
-                moves ++;
-            }
-        } catch (Exception e) {}
-        try {
-            if (grid[x-1][y-2] == 0) {
-                moves ++;
-            }
-        } catch (Exception e) {}
-        try {
-            if (grid[x-2][y-1] == 0) {
-                moves ++;
-            }
-        } catch (Exception e) {}
-        try {
-            if (grid[x+1][y-2] == 0) {
-                moves ++;
-            }
-        } catch (Exception e) {}
-        try {
-            if (grid[x-1][y+2] == 0) {
-                moves ++;
-            }
-        } catch (Exception e) {}
-        try {
-            if (grid[x-2][y+1] == 0) {
-                moves ++;
-            }
-        } catch (Exception e) {}
-        try {
-            if (grid[x+2][y-1] == 0) {
-                moves ++;
-            }
-        } catch (Exception e) {}
+        if (x+1 < gridSize && y+2 < gridSize && grid[x+1][y+2] == 0) {
+            moves ++;
+        }
+        if (x+2 < gridSize && y+1 < gridSize && grid[x+2][y+1] == 0) {
+            moves ++;
+        }
+        if (x >= 1 && y >= 2 && grid[x-1][y-2] == 0) {
+            moves ++;
+        }
+        if (x >= 2 && y >= 1 && grid[x-2][y-1] == 0) {
+            moves ++;
+        }
+        if (x+1 < gridSize && y >= 2 && grid[x+1][y-2] == 0) {
+            moves ++;
+        }
+        if (x >= 1 && y+2 < gridSize && grid[x-1][y+2] == 0) {
+            moves ++;
+        }
+        if (x >= 2 && y+1 < gridSize && grid[x-2][y+1] == 0) {
+            moves ++;
+        }
+        if (x+2 < gridSize && y >= 1 && grid[x+2][y-1] == 0) {
+            moves ++;
+        }
         return moves;
     }
 
