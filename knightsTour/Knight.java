@@ -19,12 +19,12 @@ public class Knight {
         grid = new int[n][n];
     }
 
-    public String clear(){
+    public String clear() {
 	return  "[2J";
     }
 
-    public String go(int x,int y){
-	return ("["+x+";"+y+"H");
+    public String go(int x, int y) {
+	return ("[" + x + ";" + y + "H");
     }
 
     public String toString(){
@@ -48,7 +48,7 @@ public class Knight {
     }
 
 
-    public void wait(int millis){
+    public void wait(int millis) {
 	try {
 	    Thread.sleep(millis);
 	}
