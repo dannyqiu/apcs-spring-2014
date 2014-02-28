@@ -80,7 +80,7 @@ public class Mazesolver {
     }
 
     public void solve(char[][] maze, int x, int y) {
-        wait(20);
+        wait(10);
         System.out.println(this);
 
         if (maze[x][y] == 'X') {
