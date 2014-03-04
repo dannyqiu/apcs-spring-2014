@@ -1,15 +1,15 @@
 public class Merge {
 
-    private int[] array;
-    private int[] sorted;
+    private static int[] array;
+    private static int[] sorted;
 
-    public void mSort(int[] n) {
-        this.array = n;
-        this.sorted = new int[n.length];
+    public static void mSort(int[] n) {
+        array = n;
+        sorted = new int[n.length];
         split(0, n.length-1);
     }
 
-    private void split(int start, int end) {
+    private static void split(int start, int end) {
         if (start < end) {
             int middle = (start + end) / 2;
             split(start, middle);
@@ -18,7 +18,7 @@ public class Merge {
         }
     }
 
-    private void merge(int start, int middle, int end) {
+    private static void merge(int start, int middle, int end) {
         for (int i=start; i<= end; i++) {
             sorted[i] = array[i];
         }
