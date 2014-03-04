@@ -1,48 +1,46 @@
-import java.util.*;
-
 public class Merge {
-    
-    public int[] merge(int[] a, int[] b) {
-        int aLength = a.length;
-        int bLength = b.length;
-        int sLength = aLength + bLength;
-        int[] s = new int[sLength];
-        int aIndex = 0, bIndex = 0;
-        for (int i=0; i<sLength; i++) {
-            if (aIndex == aLength) {
-                s[i] = b[bIndex];
-                bIndex++;
-            }
-            else if (bIndex == bLength) {
-                s[i] = a[aIndex];
-                aIndex++;
-            }
-            else if (a[aIndex] <= b[bIndex]) {
-                s[i] = a[aIndex];
-                aIndex++;
-            }
-            else {
-                s[i] = b[bIndex];
-                bIndex++;
-            }
-        }
-        return s;
+
+    private int[] array;
+    private int[] sorted;
+
+    public void mSort(int[] n) {
+        this.array = n;
+        this.sorted = new int[n.length];
+        split(0, n.length-1);
     }
 
-    public int[] sort(int[] n) {
-        if (n.length == 1) {
-            return n;
+    private void split(int start, int end) {
+        if (start < end) {
+            int middle = (start + end) / 2;
+            split(start, middle);
+            split(middle+1, end);
+            merge(start, middle, end);
         }
-        else {
-            int[] a = new int[n.length/2];
-            int[] b = new int[n.length - a.length];
-            for (int i=0; i<a.length; i++) {
-                a[i] = n[i];
+    }
+
+    private void merge(int start, int middle, int end) {
+        for (int i=start; i<= end; i++) {
+            sorted[i] = array[i];
+        }
+        int i = start;      // Index of sorted array from beginning -> middle
+        int j = middle + 1; // Index starting from middle -> end
+        int k = start;      // Index of original array from beginning -> end
+        while (i <= middle && j <= end) {
+            if (sorted[i] <= sorted[j]) {
+                array[k] = sorted[i];
+                i++;
             }
-            for (int i=0; i<b.length; i++) {
-                b[i] = n[i+a.length];
+            else {
+                array[k] = sorted[j];
+                j++;
             }
-            return merge(sort(a), sort(b));
+            k++;
+        }
+        // Only need to fill in original array with beginning of sorted because the end is already sorted
+        while (i <= middle) {
+            array[k] = sorted[i];
+            k++;
+            i++;
         }
     }
 }
