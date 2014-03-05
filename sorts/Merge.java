@@ -1,6 +1,6 @@
 public class Merge {
 
-    private static int[] array;
+    protected static int[] array;
     private static int[] sorted;
 
     public static void mSort(int[] n) {

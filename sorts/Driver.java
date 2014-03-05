@@ -5,6 +5,7 @@ public class Driver {
 
     public static void main(String[] args) {
         Random r = new Random();
+        long start, end;
         int[] a;
         int max = 30;
         if (args.length > 0) {
@@ -16,10 +17,11 @@ public class Driver {
         for (int i=0; i<a.length; i++) {
             a[i] = r.nextInt(max/3+1);
         }
-//        System.out.println("Before: " + Arrays.toString(a));
-//        System.out.println("Sorted: " + Arrays.toString(m.sort(a)));
-        long start = System.currentTimeMillis();
+        //System.out.println("Before: " + Arrays.toString(a));
+        start = System.currentTimeMillis();
         Merge.mSort(a);
-        System.out.println("Time taken to sort a " + max + " number array: " + (System.currentTimeMillis() - start) + " milliseconds");
+        end = System.currentTimeMillis();
+        //System.out.println("Sorted: " + Arrays.toString(Merge.array));
+        System.out.println("Time taken to sort a " + max + " number array: " + (end - start) + " milliseconds");
     }
 }
