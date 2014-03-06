@@ -1,12 +1,17 @@
-public class Merge {
+import java.util.ArrayList;
 
-    protected static int[] array;
-    private static int[] sorted;
+public class Sorts {
 
-    public static void msort(int[] n) {
-        array = n;
-        sorted = new int[n.length];
-        split(0, n.length-1);
+    protected static ArrayList<String> array;
+    private static ArrayList<String> sorted;
+
+    public static void msort(ArrayList<String> L) {
+        array = L;
+        sorted = new ArrayList<String>();
+        for (int i=0; i<array.size(); i++) {
+            sorted.add("0");
+        }
+        split(0, array.size()-1);
     }
 
     private static void split(int start, int end) {
@@ -20,25 +25,25 @@ public class Merge {
 
     private static void merge(int start, int middle, int end) {
         for (int i=start; i<= end; i++) {
-            sorted[i] = array[i];
+            sorted.set(i, array.get(i));
         }
         int i = start;      // Index of sorted array from beginning -> middle
         int j = middle + 1; // Index starting from middle -> end
         int k = start;      // Index of original array from beginning -> end
         while (i <= middle && j <= end) {
-            if (sorted[i] <= sorted[j]) {
-                array[k] = sorted[i];
+            if (sorted.get(i).compareTo(sorted.get(j)) <= 0) {
+                array.set(k, sorted.get(i));
                 i++;
             }
             else {
-                array[k] = sorted[j];
+                array.set(k, sorted.get(j));
                 j++;
             }
             k++;
         }
         // Only need to fill in original array with beginning of sorted because the end is already sorted
         while (i <= middle) {
-            array[k] = sorted[i];
+            array.set(k, sorted.get(i));
             k++;
             i++;
         }
