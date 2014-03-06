@@ -1,4 +1,4 @@
-public class Merge {
+public class Sorts {
 
     protected static int[] array;
     private static int[] sorted;
