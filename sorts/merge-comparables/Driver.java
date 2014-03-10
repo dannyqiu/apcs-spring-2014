@@ -1,16 +1,16 @@
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Driver {
 
     public static void main(String[] args) {
         long start, end;
-        ArrayList a = new ArrayList<Person>();
+        ArrayList<Person> a = new ArrayList<Person>();
         if (args.length > 0) {
             try {
+                NameGenerator gen = new NameGenerator();
                 int max = Integer.parseInt(args[0]);
                 for (int i=0; i<max; i++) {
-                    a.add(new Person(UUID.randomUUID().toString().substring(25,36)));
+                    a.add(new Person(gen.getName()));
                 }
             } catch (Exception e) {}
         }
@@ -36,7 +36,7 @@ public class Driver {
         Sorts.msort(a);
         end = System.currentTimeMillis();
         System.out.println("Sorted: " + Sorts.array);
-        System.out.println("Time taken to sort a " + a.size() + " number array: " + (end - start) + " milliseconds");
+        System.out.println("Time taken to sort a " + a.size() + " size array: " + (end - start) + " milliseconds");
     }
 
 }

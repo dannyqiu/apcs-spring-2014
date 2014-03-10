@@ -1,4 +1,4 @@
-public class Person implements Comparable {
+public class Person implements Comparable<Person> {
 
     private String name;
 
@@ -6,13 +6,9 @@ public class Person implements Comparable {
         this.name = name;
     }
 
-    public int compareTo(Object other) {
-        if (other instanceof Person) {
-            return name.compareTo(((Person) other).toString());
-        }
-        else {
-            return 0/0;
-        }
+    @Override
+    public int compareTo(Person other) {
+        return name.compareTo(other.toString());
     }
 
     public String toString() {

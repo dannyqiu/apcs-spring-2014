@@ -5,11 +5,11 @@ public class Sorts {
     protected static ArrayList array;
     private static ArrayList sorted;
 
-    public static void msort(ArrayList L) {
+    public static <T extends Comparable<T>> void msort(ArrayList<T> L) {
         array = L;
-        sorted = new ArrayList();
+        sorted = new ArrayList<T>();
         for (int i=0; i<array.size(); i++) {
-            sorted.add("0");
+            sorted.add(0);
         }
         split(0, array.size()-1);
     }
@@ -31,17 +31,15 @@ public class Sorts {
         int j = middle + 1; // Index starting from middle -> end
         int k = start;      // Index of original array from beginning -> end
         while (i <= middle && j <= end) {
-            Object ie = sorted.get(i);
-            Object je = sorted.get(j);
-            if (ie instanceof Person && je instanceof Person) {
-                if (((Person) ie).compareTo((Person) je) <= 0) {
-                    array.set(k, ie);
-                    i++;
-                }
-                else {
-                    array.set(k, je);
-                    j++;
-                }
+            Comparable ie = (Comparable) sorted.get(i);
+            Comparable je = (Comparable) sorted.get(j);
+            if (ie.compareTo(je) <= 0) {
+                array.set(k, ie);
+                i++;
+            }
+            else {
+                array.set(k, je);
+                j++;
             }
             k++;
         }
