@@ -2,10 +2,7 @@ import java.util.Random;
 
 public class Sorts {
 
-    private static int[] sorted;
-
     public static void quicksort(int[] L) {
-        sorted = new int[L.length];
         quicksort(L, 0, L.length-1);
     }
 
@@ -19,41 +16,40 @@ public class Sorts {
 
     // Returns index of where the pivot is in the sorted array
     public static int partition(int[] L, int left, int right) {
-        int pivot = (right + left) / 2;
-        int pivotValue = L[pivot];
-        int l = 0;
-        int r = right - left;
-        int c = left;
-        while (c < pivot) {
-            if (L[c] <= pivotValue) {
-                sorted[l] = L[c];
-                l++;
+        if (right != left) {
+            int pivot = (left + right) / 2;
+            int pivotValue = L[pivot];
+            int l = left;
+            int r = right-1;
+            int temp = L[right];
+            L[right] = pivotValue;
+            L[pivot] = temp;
+            while (l != r) {
+                if (L[l] <= pivotValue) {
+                    l++;
+                }
+                else {
+                    temp = L[r];
+                    L[r] = L[l];
+                    L[l] = temp;
+                    r--;
+                }
+            }
+            if (L[l] < pivotValue) {
+                temp = L[l+1];
+                L[l+1] = pivotValue;
+                L[right] = temp;
+                return l+1;
             }
             else {
-                sorted[r] = L[c];
-                r--;
+                temp = L[l];
+                L[l] = pivotValue;
+                L[right] = temp;
+                return l;
             }
-            c++;
         }
-        sorted[l] = pivotValue;
-        while (c <= right) {
-            if (L[c] <= pivotValue) {
-                sorted[l] = L[c];
-                l++;
-            }
-            else {
-                sorted[r] = L[c];
-                r--;
-            }
-            c++;
+        else {
+            return left;
         }
-        c = left;
-        int s = 0;
-        while (c <= right) {
-            L[c] = sorted[s];
-            c++;
-            s++;
-        }
-        return l+left-1;
     }
 }
