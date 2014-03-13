@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Sorts {
 
-    private static int[] sorted = new int[30];
+    private static int[] sorted;
 
     public static void quicksort(int[] L) {
         sorted = new int[L.length];
@@ -19,27 +19,41 @@ public class Sorts {
 
     // Returns index of where the pivot is in the sorted array
     public static int partition(int[] L, int left, int right) {
-        int n = (right + left) / 2;
-        int l = left;
-        int r = right;
+        int pivot = (right + left) / 2;
+        int pivotValue = L[pivot];
+        int l = 0;
+        int r = right - left;
         int c = left;
-        while (c <= right) {
-            if (c != n) {
-                if (L[c] <= L[n]) {
-                    sorted[l] = L[c];
-                    l++;
-                }
-                else {
-                    sorted[r] = L[c];
-                    r--;
-                }
+        while (c < pivot) {
+            if (L[c] <= pivotValue) {
+                sorted[l] = L[c];
+                l++;
+            }
+            else {
+                sorted[r] = L[c];
+                r--;
             }
             c++;
         }
-        sorted[l] = L[n];
-        for (int i=left; i<=right; i++) {
-            L[i] = sorted[i];
+        sorted[l] = pivotValue;
+        while (c <= right) {
+            if (L[c] <= pivotValue) {
+                sorted[l] = L[c];
+                l++;
+            }
+            else {
+                sorted[r] = L[c];
+                r--;
+            }
+            c++;
         }
-        return l;
+        c = left;
+        int s = 0;
+        while (c <= right) {
+            L[c] = sorted[s];
+            c++;
+            s++;
+        }
+        return l+left-1;
     }
 }
