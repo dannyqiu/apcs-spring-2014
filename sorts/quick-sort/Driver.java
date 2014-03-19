@@ -7,21 +7,21 @@ public class Driver {
         Random r = new Random();
         long start, end;
         int[] a;
-        int max = 30;
-        if (args.length > 0) {
-            try {
-                max = Integer.parseInt(args[0]);
-            } catch (Exception e) {}
-        }
-        a = new int[max];
+        int maxNums = 30;
+        int max = 10;
+        try {
+            maxNums = Integer.parseInt(args[0]);
+            max = Integer.parseInt(args[1]);
+        } catch (Exception e) {}
+        a = new int[maxNums];
         for (int i=0; i<a.length; i++) {
-            a[i] = r.nextInt(max/3+1);
+            a[i] = r.nextInt(max);
         }
         //System.out.println("Before: " + Arrays.toString(a));
         start = System.currentTimeMillis();
         Sorts.quicksort(a);
         end = System.currentTimeMillis();
         //System.out.println("Sorted: " + Arrays.toString(a));
-        System.out.println("Time taken to sort a " + max + " number array: " + (end - start) + " milliseconds");
+        System.out.println("Time taken to sort a " + a.length + " number array: " + (end - start) + " milliseconds");
     }
 }
