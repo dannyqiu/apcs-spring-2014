@@ -8,8 +8,14 @@ public class MyLinkedList {
     public void add(String s, int position) {
         Node current = getNode(position);
         Node tmp = new Node(s);
-        tmp.setNext(current.getNext());
-        current.setNext(tmp);
+        if (position == 0) {
+            tmp.setNext((head == null)? null:head);
+            head = tmp;
+        }
+        else {
+            tmp.setNext(current.getNext());
+            current.setNext(tmp);
+        }
     }
 
     public String get(int position) {
@@ -17,12 +23,12 @@ public class MyLinkedList {
     }
 
     // Helper function to get the Node at the position given
-    public Node getNode(int position) throws Exception {
+    public Node getNode(int position) {
         Node current = head;
         for (int i=0; i<position; i++) {
             current = current.getNext();
             if (current == null) {
-                throw new Exception();
+                throw new IndexOutOfBoundsException();
             }
         }
         return current;
@@ -33,7 +39,7 @@ public class MyLinkedList {
         current.setData(newString);
     }
 
-    public void remove(int position) throws Exception {
+    public void remove(int position) {
         if (position == 0) {
             head = head.getNext();
         }
@@ -68,6 +74,7 @@ public class MyLinkedList {
             l++;
             current = current.getNext();
         }
+        return l;
     }
 
     public String toString() {
@@ -78,6 +85,7 @@ public class MyLinkedList {
             if (current.getNext() != null) {
                 list += ", ";
             }
+            current = current.getNext();
         }
         list += "]";
         return list;
