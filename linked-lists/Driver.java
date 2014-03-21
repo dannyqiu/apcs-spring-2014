@@ -13,5 +13,7 @@ public class Driver {
         System.out.println("Add 5th element APCS:\t" + l);
         System.out.println("Position of 99999:\t" + l.find("99999"));
         System.out.println("Length of the list:\t" + l.length());
+        l.remove(-1);
+        //l.add("SWAG", 100);
     }
 }
