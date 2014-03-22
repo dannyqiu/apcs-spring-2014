@@ -14,7 +14,7 @@ public class MyLinkedList extends MyLinkedListBase {
 
     public void remove(int position) {
         super.remove(position);
-        length++;
+        length--;
     }
 
     public int length() {
