@@ -203,6 +203,10 @@ public class Driver2
 		printw(1, "exception thrown");
 	    }
 
+        printw(1, "ADDING TO THE END (NEW)");
+	thing.add("LAST_NEW", thing.length());
+	printw(1, thing);
+
 	printw(0, "TESTING COMPLETE!\n");
     }
 

@@ -1,18 +1,31 @@
 public class MyLinkedList<T> {
 
     private Node<T> head;
+    private Node<T> tail;
     private int length;
 
     public MyLinkedList() {
         head = new Node<T>();
+        tail = head;
         length = 0;
     }
 
     public void add(T data, int position) {
+        if (position == length) {
+            add(data);
+            return;
+        }
         Node<T> current = getNode(position-1);
         Node<T> tmp = new Node<T>(data);
         tmp.setNext(current.getNext());
         current.setNext(tmp);
+        length++;
+    }
+
+    public void add(T data) {
+        Node<T> tmp = new Node<T>(data);
+        tail.setNext(tmp);
+        tail = tmp;
         length++;
     }
 
@@ -44,6 +57,9 @@ public class MyLinkedList<T> {
         else {
             throw new IndexOutOfBoundsException("Specified position is too high!");
         }
+        if (position == length-1) {
+            tail = current;
+        }
         length--;
     }
 
@@ -61,6 +77,10 @@ public class MyLinkedList<T> {
     }
 
     public int length() {
+        return length;
+    }
+
+    public int size() {
         return length;
     }
 

@@ -147,8 +147,17 @@ public class Driver {
         catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(l + "\n");
 
-        System.out.println("\nFinal linked list: " + l);
+        System.out.println("Adding 666 to the end");
+        l.add(new Integer(666));
+        System.out.println(l + "\n");
+
+        System.out.println("Removing the last element");
+        l.remove(l.size()-1);
+        System.out.println(l + "\n");
+
+        System.out.println("Final linked list: " + l);
         System.out.println("Length: " + l.length());
     }
 }
