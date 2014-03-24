@@ -49,15 +49,15 @@ public class MyLinkedList<T> {
 
     public int find(T data) {
         Node<T> current = head.getNext();
-        int i = -1;
+        int i = 0;
         while (current != null) {
-            i++;
             if (current.getData().equals(data)) {
-                break;
+                return i;
             }
             current = current.getNext();
+            i++;
         }
-        return i;
+        return -1;
     }
 
     public int length() {
@@ -73,6 +73,9 @@ public class MyLinkedList<T> {
             throw new IndexOutOfBoundsException("Negative positions do not exist!");
         }
         Node<T> current = head.getNext();
+        if (current == null) {
+            throw new IndexOutOfBoundsException("Specified position is too high!");
+        }
         for (int i=0; i<position; i++) {
             current = current.getNext();
             if (current == null) {
