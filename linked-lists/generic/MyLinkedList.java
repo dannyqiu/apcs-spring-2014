@@ -1,14 +1,14 @@
 public class MyLinkedList<T> {
 
-    private Node head;
+    private Node<T> head;
     private int length;
 
     public MyLinkedList() {
-        head = new Node();
+        head = new Node<T>();
         length = 0;
     }
 
-    public <T> void add(T data, int position) {
+    public void add(T data, int position) {
         Node<T> current = getNode(position-1);
         Node<T> tmp = new Node<T>(data);
         tmp.setNext(current.getNext());
@@ -17,28 +17,42 @@ public class MyLinkedList<T> {
     }
 
     public T get(int position) {
-        return getNode(position).getData();
+        if (position < 0) {
+            throw new IndexOutOfBoundsException("Negative positions do not exist!");
+        }
+        else {
+            return getNode(position).getData();
+        }
     }
 
-    public <T> void set(int position, T newData) {
+    public void set(int position, T newData) {
+        if (position < 0) {
+            throw new IndexOutOfBoundsException("Negative positions do not exist!");
+        }
         Node<T> current = getNode(position);
         current.setData(newData);
     }
 
     public void remove(int position) {
+        if (position < 0) {
+            throw new IndexOutOfBoundsException("Negative positions do not exist!");
+        }
         Node<T> current = getNode(position-1);
         if (current.getNext() != null) {
             current.setNext(current.getNext().getNext());
         }
+        else {
+            throw new IndexOutOfBoundsException("Specified position is too high!");
+        }
         length--;
     }
 
-    public <T> int find(T data) {
+    public int find(T data) {
         Node<T> current = head.getNext();
         int i = -1;
         while (current != null) {
             i++;
-            if (current.getData().equals(s)) {
+            if (current.getData().equals(data)) {
                 break;
             }
             current = current.getNext();
