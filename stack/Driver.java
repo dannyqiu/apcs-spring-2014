@@ -2,7 +2,7 @@ public class Driver {
 
     public static void main(String[] args) {
         MyArrayStack<Double> s = new MyArrayStack<Double>();
-        MyLinkedStack<Double> l = new MyLinkedStack<Double>();
+        MyStack<Double> l = new MyStack<Double>();
 
         int size = 11;
         if (args.length > 0) {
