@@ -44,4 +44,18 @@ public class MyArrayStack<E> {
     public boolean empty() {
         return size <= -1;
     }
+
+    public String toString() {
+        String s = "[";
+        for (int i=0; i<=size; i++) {
+            if (i < size) {
+                s += stack[i] + ", ";
+            }
+            else {
+                s += stack[i];
+            }
+        }
+        s += "]";
+        return s;
+    }
 }

@@ -34,6 +34,9 @@ public class Calculator {
             else if (input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit")) {
                 done = true;
             }
+            else if (input.equalsIgnoreCase("debug")) {
+                System.out.println(this);
+            }
             else {
                 try {
                     history.push(Double.parseDouble(input));
@@ -71,11 +74,11 @@ public class Calculator {
     }
 
     public double divide() {
-        double d1 = history.pop();
-        double d2 = history.pop();
-        if (d1 == 0) {
+        if (history.peek() == 0) {
             throw new ArithmeticException("Division by 0");
         }
+        double d1 = history.pop();
+        double d2 = history.pop();
         double result = d2 / d1;
         history.push(result);
         return result;
@@ -87,6 +90,10 @@ public class Calculator {
         double result = Math.pow(e2, e1);
         history.push(result);
         return result;
+    }
+
+    public String toString() {
+        return history.toString();
     }
 
 }
