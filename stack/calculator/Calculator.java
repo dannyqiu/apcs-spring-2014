@@ -11,9 +11,9 @@ public class Calculator {
     }
 
     public void run() {
-        boolean power = true;
+        boolean done = false;
         String input;
-        while (power) {
+        while (!done) {
             System.out.print(">>> ");
             input = sc.nextLine();
             if (input.equals("+")) {
@@ -28,15 +28,18 @@ public class Calculator {
             else if (input.equals("/")) {
                 System.out.println(divide());
             }
+            else if (input.equals("^")) {
+                System.out.println(exponent());
+            }
             else if (input.equalsIgnoreCase("exit") || input.equalsIgnoreCase("quit")) {
-                power = false;
+                done = true;
             }
             else {
                 try {
                     history.push(Double.parseDouble(input));
                 }
                 catch (Exception e) {
-                    System.out.println("Bad input! Available options are: + , - , * , / , or any number");
+                    System.out.println("Bad input! Available options are: + , - , * , / , ^ , or any number");
                 }
             }
         }
@@ -70,7 +73,18 @@ public class Calculator {
     public double divide() {
         double d1 = history.pop();
         double d2 = history.pop();
+        if (d1 == 0) {
+            throw new ArithmeticException("Division by 0");
+        }
         double result = d2 / d1;
+        history.push(result);
+        return result;
+    }
+
+    public double exponent() {
+        double e1 = history.pop();
+        double e2 = history.pop();
+        double result = Math.pow(e2, e1);
         history.push(result);
         return result;
     }
