@@ -34,7 +34,14 @@ public class RunningMedian {
             heap[q] = tmp;
         }
 
-        abstract int remove();
+        int remove() {
+            size--;
+            int tmp = heap[0];
+            heap[0] = heap[size];
+            pushDown(0);
+            return tmp;
+        }
+
         abstract void pushUp(int i);
         abstract void pushDown(int i);
 
@@ -58,14 +65,6 @@ public class RunningMedian {
                 swap(i, parent);
                 pushUp(parent);
             }
-        }
-
-        int remove() {
-            int tmp = heap[0];
-            heap[0] = Integer.MIN_VALUE;
-            pushDown(0);
-            size--;
-            return tmp;
         }
 
         void pushDown(int i) {
@@ -96,14 +95,6 @@ public class RunningMedian {
                 swap(i, parent);
                 pushUp(parent);
             }
-        }
-
-        int remove() {
-            int tmp = heap[0];
-            heap[0] = Integer.MAX_VALUE;
-            pushDown(0);
-            size--;
-            return tmp;
         }
 
         void pushDown(int i) {
@@ -139,7 +130,7 @@ public class RunningMedian {
                 smaller.add(i);
             }
             else {
-                if (i < getMedian()) {
+                if (i < median()) {
                     smaller.add(i);
                 }
                 else {
@@ -148,7 +139,7 @@ public class RunningMedian {
             }
         }
         else if (smaller.getSize() > larger.getSize()) {
-            if (i < getMedian()) {
+            if (i < median()) {
                 int tmp = smaller.remove();
                 larger.add(tmp);
                 smaller.add(i);
@@ -158,7 +149,7 @@ public class RunningMedian {
             }
         }
         else if (larger.getSize() > smaller.getSize()) {
-            if (i > getMedian()) {
+            if (i > median()) {
                 int tmp = larger.remove();
                 smaller.add(tmp);
                 larger.add(i);
@@ -173,7 +164,36 @@ public class RunningMedian {
         return;
     }
 
-    public double getMedian() {
+    public double remove() {
+        if (smaller.getSize() == 0 && larger.getSize() == 0) {
+            throw new IllegalStateException();
+        }
+        else if (smaller.getSize() == 0) {
+            larger.remove();
+            return larger.get(0);
+        }
+        else if (larger.getSize() == 0) {
+            smaller.remove();
+            return smaller.get(0);
+        }
+        else {
+            if (smaller.getSize() - larger.getSize() == 1) {
+                smaller.remove();
+                return smaller.get(0);
+            }
+            else if (larger.getSize() - smaller.getSize() == 1) {
+                larger.remove();
+                return larger.get(0);
+            }
+            else {
+                smaller.remove();
+                larger.remove();
+                return (smaller.get(0) + larger.get(0)) / 2.0;
+            }
+        }
+    }
+
+    public double median() {
         if (smaller.getSize() == 0 && larger.getSize() == 0) {
             throw new IllegalStateException();
         }

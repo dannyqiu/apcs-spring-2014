@@ -7,8 +7,13 @@ public class Driver {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             int input = sc.nextInt();
-            m.add(input);
-            System.out.println(m.getMedian());
+            if (input != 666) {
+                m.add(input);
+            }
+            else {
+                m.remove();
+            }
+            System.out.println(m.median());
             System.out.println(m);
         }
     }
