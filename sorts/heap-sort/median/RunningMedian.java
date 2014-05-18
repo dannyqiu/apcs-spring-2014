@@ -114,8 +114,8 @@ public class RunningMedian {
         }
     }
 
-    private MaxHeap smaller;
-    private MinHeap larger;
+    protected MaxHeap smaller;
+    protected MinHeap larger;
 
     public RunningMedian() {
         smaller = new MaxHeap();
@@ -165,32 +165,29 @@ public class RunningMedian {
     }
 
     public double remove() {
+        double med = median();
         if (smaller.getSize() == 0 && larger.getSize() == 0) {
             throw new IllegalStateException();
         }
         else if (smaller.getSize() == 0) {
             larger.remove();
-            return larger.get(0);
         }
         else if (larger.getSize() == 0) {
             smaller.remove();
-            return smaller.get(0);
         }
         else {
             if (smaller.getSize() - larger.getSize() == 1) {
                 smaller.remove();
-                return smaller.get(0);
             }
             else if (larger.getSize() - smaller.getSize() == 1) {
                 larger.remove();
-                return larger.get(0);
             }
             else {
                 smaller.remove();
                 larger.remove();
-                return (smaller.get(0) + larger.get(0)) / 2.0;
             }
         }
+        return med;
     }
 
     public double median() {
