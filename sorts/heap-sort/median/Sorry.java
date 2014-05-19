@@ -13,7 +13,7 @@ public class Sorry {
             for (int i=1; i<args.length; i++) {
                 try {
                     Random r = new Random(Long.parseLong(args[i]));
-                    //test1(r, size);
+                    test1(r, size);
                     test2(r, size);
                 }
                 catch (Exception e) {
